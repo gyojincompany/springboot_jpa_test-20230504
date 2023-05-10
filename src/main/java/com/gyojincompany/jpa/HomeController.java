@@ -1,5 +1,7 @@
 package com.gyojincompany.jpa;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +48,18 @@ public class HomeController {
 	@RequestMapping(value = "/search")
 	public String search() {
 		return "search";
+	}
+	
+	@RequestMapping(value = "/searchOk")
+	public String searchOk(HttpServletRequest request, Model model) {		
+		
+		String searchName = request.getParameter("searchName");
+		
+		List<MemberDto> memberDtos = memberRepository.findByName(searchName);
+		
+		model.addAttribute("memberDtos", memberDtos);
+		
+		return "searchOk";
 	}
 
 }
