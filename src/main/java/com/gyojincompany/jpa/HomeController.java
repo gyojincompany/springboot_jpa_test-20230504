@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.gyojincompany.jpa.dto.MemberDto;
@@ -21,23 +22,30 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/joinOk")
-	public String joinOk(HttpServletRequest request) {
+	public String joinOk(MemberDto memberDto, Model model) {
 		
-		String name = request.getParameter("name");
-		int age = Integer.parseInt(request.getParameter("age"));//문자열을 int로 변환
-		int grade = Integer.parseInt(request.getParameter("grade"));
-		String etc = request.getParameter("etc");
+//		String name = request.getParameter("name");
+//		int age = Integer.parseInt(request.getParameter("age"));//문자열을 int로 변환
+//		int grade = Integer.parseInt(request.getParameter("grade"));
+//		String etc = request.getParameter("etc");
 		
-		MemberDto memberDto = new MemberDto();
-		
-		memberDto.setName(name);
-		memberDto.setAge(age);
-		memberDto.setGrade(grade);
-		memberDto.setEtc(etc);
+//		MemberDto memberDto = new MemberDto();
+//		
+//		memberDto.setName(name);
+//		memberDto.setAge(age);
+//		memberDto.setGrade(grade);
+//		memberDto.setEtc(etc);
 		
 		memberRepository.save(memberDto);
 		
+		model.addAttribute("memberDto", memberDto);
+		
 		return "joinOk";
+	}
+	
+	@RequestMapping(value = "/search")
+	public String search() {
+		return "search";
 	}
 
 }

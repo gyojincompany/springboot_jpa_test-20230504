@@ -37,5 +37,7 @@ public class MemberDto {
 	
 	@Column(name="etc", length = 100)
 	private String etc;//기타 회원 설명
+	
+	
 
 }
