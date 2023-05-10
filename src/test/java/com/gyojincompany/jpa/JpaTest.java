@@ -51,13 +51,17 @@ public class JpaTest {
 	@DisplayName("회원 정보 수정 테스트")
 	public void modifyMember() {
 		
-		Optional<MemberDto> optionalDto = memberRepository.findById(3L);
+		Optional<MemberDto> optionalDto = memberRepository.findById(10L);
 		
-		MemberDto memberDto = optionalDto.get();
+		if(optionalDto.isPresent()) {//null 값 여부 체크
 		
-		memberDto.setAge(32);//나이 수정
-		
-		memberRepository.save(memberDto);
+			MemberDto memberDto = optionalDto.get();
+			
+			memberDto.setAge(32);//나이 수정
+			memberDto.setName("강감찬");//이름수정
+			
+			memberRepository.save(memberDto); 
+		}
 		
 		optionalDto = memberRepository.findById(3L);
 		
