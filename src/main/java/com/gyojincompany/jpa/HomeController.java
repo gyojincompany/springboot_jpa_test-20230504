@@ -74,6 +74,15 @@ public class HomeController {
 		memberRepository.deleteById(Long.parseLong(hakbun));		
 		
 		return "redirect:memberList";
+	}	
+	
+	@RequestMapping(value = "/deleteOk2")//이름으로 조회하여 삭제
+	public String deleteOk2(HttpServletRequest request) {
+		
+		String name = request.getParameter("name");
+		memberRepository.deleteAllByName(name);	
+		
+		return "redirect:memberList";
 	}
 	
 	@RequestMapping(value = "/memberList")
